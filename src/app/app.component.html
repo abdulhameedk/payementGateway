@@ -1,0 +1,113 @@
+<body>
+  
+  <nav class="navbar navbar-expand-lg navbar-primary bg-primary">
+    <a class="navbar-brand" href="#" style="color: white;"><i class="fab fa-opencart"></i> Flipkart</a>
+    </nav>
+  <div class="container mt-5">
+    <div class="row" style="margin: 0 auto;">
+        <div class="col-xs-12 col-md-12 col-md-offset-12 card">
+            <div class="panel panel-default">
+                <div class="panel-heading card-title mt-4">
+                        <h1 style="text-align: center;">Payment Gateway</h1>
+                </div>
+                <div class="panel-body card-body">
+                  <button class="btn btn-outline-primary mb-4" *ngIf="getData.length > 0" type="button" data-toggle="collapse" data-target="#collapseExample9" aria-expanded="false" aria-controls="collapseExample9" style="width:100%;">
+                    <div class="row">
+                      <div class="col-12" style="text-align:left !important;"><h2>View Saved Card</h2>
+                      </div>
+                    </div>
+                  </button>
+                  <div class="collapse mb-3" id="collapseExample9">
+                    <mat-card>
+                      <mat-card-content>
+                        <div class="card card-body mb-4" id="viewCard" *ngFor="let item of cardArray,let i = index">
+                          <div class="face face1">
+                             <div class="content">
+                                <div class="input-group">
+                                  <label for="Name">Name : </label>
+                                  <label for="Name" id="cardView">{{item.name}}</label>
+                                </div>
+                                <div class="input-group">
+                                  <label for="CardNum">Card Number : </label>
+                                  <label for="CardNum" id="cardView">{{item.cardNumb}}</label>
+                    
+                                </div>
+                                <div class="input-group">
+                                  <label for="Expiry">Expiry : </label>
+                                  <label for="Expiry" id="cardView">{{item.expiry}}</label>
+                                </div>
+                                <div class="input-group">
+                                  <label for="cvv">CVV : </label>
+                                  <label for="cvv" id="cardView">{{item.cvv}}</label>
+                                  <label id="cardView"><i class="fab fa-cc-visa" *ngIf="item.cardtype == 'visa'"></i>
+                                    <i class="fab fa-cc-mastercard" *ngIf="item.cardtype == 'mastercard'"></i>
+                                    <i class="fab fa-cc-amex" *ngIf="item.cardtype == 'american express'"></i>
+                                    <i class="fas fa-credit-card" *ngIf="item.cardtype == 'Unknown'"></i>
+                                    <i class="fab fa-cc-diners-club" *ngIf="item.cardtype == 'maestro'"></i></label  >
+                                </div>
+                             </div>
+                          </div>
+                          <div class="floating">
+                            <button class="btn btn-outline-light" (click)="deleteCard(i)"><i class="fas fa-trash-alt"></i></button>
+                          </div>
+                       </div>
+                       
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                  <button class="btn btn-outline-primary mb-4" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="width:100%;">
+                    <div class="row">
+                      <div class="col-12" style="text-align:left !important;"><h2>Add New Card</h2>
+                        <span style="font-size: 12px;">Safe money transfer using your bank account. Safe payment online. Credit card needed. Visa, Maestro, Discover, American Express.</span>
+                      </div>
+                    </div>
+                  </button>
+                <div class="collapse" id="collapseExample">
+                  <mat-card>
+                    <mat-card-title>
+                      Enter Card Details
+                    </mat-card-title>
+                  <mat-card-content>
+                    <form>
+                      <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                          <mat-label>Name</mat-label>
+                        <input matInput placeholder="Card Holder Name" id="name" type="text" [(ngModel)]="cardDetails.name" name="name">
+                    </mat-form-field>
+                  
+                      </div>
+                      <div>
+                        <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                          <mat-label>Card Number</mat-label>
+                          <input matInput placeholder="Enter Card No" id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric" maxlength="19" [(ngModel)]="cardDetails.cardNumb" name="cardNumb" (input)="cardChange($event.target.value)">
+                            <span class="input-group-addon"><svg id="ccicon" class="ccicon" width="750" height="471" viewBox="0 0 750 471" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink">
+                            </svg></span>
+                        </mat-form-field>
+                      </div>
+                      </div>
+                      <div class="form-group row">
+                        <mat-form-field class="example-full-width col-6">
+                          <mat-label>Expiry Date</mat-label>
+                          <input matInput placeholder="MM/YY" id="expiryDate" type="text" pattern="[0-9]*" [(ngModel)]="cardDetails.expiry" name="expiry" inputmode="numeric">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width col-6">
+                      <mat-label>CVV</mat-label>
+                      <input matInput placeholder="CVV" id="securityCode" type="text" pattern="[0-9]*" [(ngModel)]="cardDetails.cvv" name="cvv" inputmode="numeric">
+                </mat-form-field>
+                        </div>
+                    <div class="col-xs-12">
+                      <button mat-raised-button color="primary" (click)="saveCard()">Add Card</button>
+                  </div>
+                        </form>
+                      </mat-card-content>
+                  </mat-card>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  </body>
+  
